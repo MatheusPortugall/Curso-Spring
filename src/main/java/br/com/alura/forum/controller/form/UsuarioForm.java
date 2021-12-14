@@ -5,8 +5,14 @@ import br.com.alura.forum.modelo.Topico;
 import br.com.alura.forum.modelo.Usuario;
 import br.com.alura.forum.repository.CursoRepository;
 import br.com.alura.forum.repository.UsuariosRepository;
+import com.sun.istack.NotNull;
+import org.hibernate.validator.constraints.Length;
+
+import javax.validation.constraints.NotEmpty;
 
 public class UsuarioForm {
+
+    @NotNull @NotEmpty @Length(min = 5)
     private String nome;
     private String email;
     private String senha;
