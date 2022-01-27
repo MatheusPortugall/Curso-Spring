@@ -5,6 +5,7 @@ import java.util.List;
 
 import javax.validation.Valid;
 
+import br.com.alura.forum.controller.form.AtualizacaoTopicoForm;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -48,11 +49,15 @@ public class TopicosController {
 
     @GetMapping("/{id}")
     public TopicoDto detalhar(@PathVariable Long id){
-        System.out.println("ENTROU AQUI");
         Topico topico = topicoRepository.getById(id);
         System.out.println(topico);
-        System.out.println("SAIU AQUI");
         return new TopicoDto(topico);
+    }
+
+    @PutMapping("/{id}")
+    public ResponseEntity<TopicoDto> atualizar(@PathVariable Long id, @RequestBody @Valid AtualizacaoTopicoForm form) {
+        Topico topico = form.atualizar(id, topicoRepository);
+        return ResponseEntity.ok(new TopicoDto(topico));
     }
 
 }
